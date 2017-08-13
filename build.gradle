@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.akhikhl.gretty' version '1.4.2'
+    id "com.github.samueltbrown.cucumber" version "0.9"
+}
+
+gretty {
+    httpPort = 8888
+    integrationTestTask = 'cucumber'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+cucumber {
+    formats = [
+        'pretty', // prints nice format out to the console
+        'html:build/reports/cucumber', // html
+        'junit:build/cucumber.xml' // junit format for integration with CI tool etc
+    ]
+}
+
+check.dependsOn tasks.test, tasks.cucumber
+
+
+dependencies {
+	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    compile (
+        'org.springframework:spring-test:3.2.3.RELEASE'
+    )
+
+    testCompile (
+        'junit:junit:4.12',
+        'org.mockito:mockito-core:2.7.19',
+        'io.github.bonigarcia:webdrivermanager:1.7.1',
+        'org.seleniumhq.selenium:selenium-java:3.3.1',
+        'info.cukes:cucumber-java:1.2.5',
+        'info.cukes:cucumber-junit:1.2.5'
+    )
+}
