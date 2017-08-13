@@ -17,7 +17,7 @@ public class CensorSteps {
         if(driver == null) {
             ChromeDriverManager.getInstance().setup();
             driver = new ChromeDriver();
-            driver.get("http://localhost:8888/quickstart");
+            driver.get("http://localhost:8888/censor-sample");
         }
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> driver.quit()));
